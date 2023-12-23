@@ -1,7 +1,10 @@
 package com.tensa.quickerioc;
 
+import lombok.NonNull;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * A dependency management pool.
@@ -28,11 +31,11 @@ public interface DependencyPool {
 	 * Returning dependency for specific name and class.
 	 *
 	 * @param name  Name of dependency.
-	 * @param clazz Class of dependency.
+	 * @param clazz Class of dependency. Cannot be null.
 	 * @param <T>   Type of dependency.
 	 * @return A dependency of specific name and class. Can be not present.
 	 */
-	<T> Optional<T> getDependency(String name, Class<T> clazz);
+	@NonNull <T> Optional<T> getDependency(@NonNull String name, @NonNull Class<T> clazz);
 	
 	/**
 	 * Returning all dependencies for specific class.
@@ -41,13 +44,14 @@ public interface DependencyPool {
 	 * @param <T>   Type of dependencies.
 	 * @return A dependencies of specific class. Cannot be null.
 	 */
-	<T> List<T> getDependencies(Class<T> clazz);
+	@NonNull <T> List<T> getDependencies(@NonNull Class<T> clazz);
 	
 	/**
 	 * Returning all dependencies of this pool.
 	 *
 	 * @return All dependencies of this pool.
 	 */
-	List<Object> getAllDependencies();
+	@NonNull
+	Set<Object> getAllDependencies();
 	
 }
