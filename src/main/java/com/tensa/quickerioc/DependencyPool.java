@@ -16,13 +16,6 @@ import java.util.Set;
 public interface DependencyPool {
 	
 	/**
-	 * Inject dependency to specific object.
-	 *
-	 * @param object Target for inject dependencies.
-	 */
-	void injectDependencies(Object object);
-	
-	/**
 	 * Returning dependency for specific name and class.
 	 *
 	 * @param name  Name of dependency.
