@@ -42,4 +42,13 @@ public interface DependencyPool {
 	@NonNull
 	Set<Object> getAllDependencies();
 	
+	/**
+	 * Register object as dependency with specific name and class
+	 *
+	 * @param object Object to register dependency.
+	 * @param name   Dependency's name.
+	 * @param clazz  Dependency's class.
+	 */
+	void register(@NonNull Object object, @NonNull String name, @NonNull Class<?> clazz);
+	
 }
