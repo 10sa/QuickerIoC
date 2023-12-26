@@ -41,4 +41,11 @@ public @interface Injection {
 	 */
 	boolean required() default true;
 	
+	/**
+	 * Type of dependency. If not specified or {@link Void} class presented, following target's declared type.
+	 *
+	 * @return Type of dependency. If not specified, returns {@link Void} class.
+	 */
+	Class<?> clazz() default Void.class;
+	
 }
