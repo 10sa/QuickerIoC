@@ -1,6 +1,6 @@
-package com.tensa.quickerioc;
+package com.tensa.robotarm;
 
-import com.tensa.quickerioc.annotation.Dependency;
+import com.tensa.robotarm.annotation.Dependency;
 import lombok.NonNull;
 
 public interface DependencyManager {

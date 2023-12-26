@@ -1,4 +1,4 @@
-package com.tensa.quickerioc;
+package com.tensa.robotarm;
 
 import lombok.NonNull;
 

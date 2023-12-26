@@ -1,6 +1,6 @@
-package com.tensa.quickerioc.annotation;
+package com.tensa.robotarm.annotation;
 
-import com.tensa.quickerioc.DependencyUnsatisfiedException;
+import com.tensa.robotarm.DependencyUnsatisfiedException;
 
 import java.lang.annotation.*;
 

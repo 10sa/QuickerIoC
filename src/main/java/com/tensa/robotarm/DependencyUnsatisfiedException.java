@@ -1,4 +1,4 @@
-package com.tensa.quickerioc;
+package com.tensa.robotarm;
 
 /**
  * Exception for state of dependency unsatisfied.

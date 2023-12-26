@@ -1,4 +1,4 @@
-package com.tensa.quickerioc.annotation;
+package com.tensa.robotarm.annotation;
 
 import java.lang.annotation.*;
 
