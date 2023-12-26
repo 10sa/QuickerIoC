@@ -16,11 +16,6 @@ import java.util.Set;
 public interface DependencyPool {
 	
 	/**
-	 * Initialize dependency pool.
-	 */
-	void initialize();
-	
-	/**
 	 * Inject dependency to specific object.
 	 *
 	 * @param object Target for inject dependencies.
