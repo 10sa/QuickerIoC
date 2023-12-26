@@ -11,21 +11,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * The abstract implementation of {@link DependencyPool} interface.
+ * The {@link HashSet} based {@link DependencyPool} interface implementation.
  */
 public class HashSetDependencyPool implements DependencyPool {
 	
 	protected final Set<Dependency> dependencies;
 	
-	protected HashSetDependencyPool(@NonNull final Set<Dependency> dependencySet) {
-		this.dependencies = dependencySet;
-	}
-	
-	protected HashSetDependencyPool(final int initSize) {
+	public HashSetDependencyPool(final int initSize) {
 		this.dependencies = new HashSet<>(initSize);
 	}
 	
-	protected HashSetDependencyPool() {
+	public HashSetDependencyPool() {
 		this.dependencies = new HashSet<>();
 	}
 	
