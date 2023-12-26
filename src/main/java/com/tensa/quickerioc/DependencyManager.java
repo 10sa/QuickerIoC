@@ -3,7 +3,7 @@ package com.tensa.quickerioc;
 import com.tensa.quickerioc.annotation.Dependency;
 import lombok.NonNull;
 
-public interface DependencyInjector {
+public interface DependencyManager {
 	
 	/**
 	 * Inject dependency to specified object's {@link Dependency} annotated fields.
