@@ -1,13 +1,15 @@
 package com.tensa.robotarm;
 
+import com.tensa.robotarm.annotation.Dependency;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.List;
 
 /**
  * Interface of dependency scanner.
- *
- * @author Kim Jae Hwan
- * @version 0.1.0
- * @since 0.1.0
  */
 public interface DependencyScanner {
 	
@@ -16,6 +18,21 @@ public interface DependencyScanner {
 	 *
 	 * @return Dependencies classes.
 	 */
-	List<Class<?>> scan();
+	List<ScanResult> scan();
+	
+	/**
+	 * Dependency result data class.
+	 */
+	@Getter
+	@ToString
+	@EqualsAndHashCode
+	@AllArgsConstructor
+	public static class ScanResult {
+		
+		private Class<?> clazz;
+		
+		private Dependency annotation;
+		
+	}
 	
 }
