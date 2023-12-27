@@ -4,10 +4,6 @@ import java.lang.annotation.*;
 
 /**
  * Annotation for designate class as dependency.
- *
- * @author Kim Jae Hwan
- * @version 0.1.0
- * @since 0.1.0
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -29,5 +25,12 @@ public @interface Dependency {
 	 * @return Priority of dependency.
 	 */
 	int priority() default 0;
+	
+	/**
+	 * Type of dependency. If not specified or {@link Void} class presented, following annotated class's type.
+	 *
+	 * @return Type of dependency. If not specified, returns {@link Void} class.
+	 */
+	Class<?> clazz() default Void.class;
 	
 }
