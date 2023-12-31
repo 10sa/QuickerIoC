@@ -40,7 +40,7 @@ public interface DependencyPool {
 	 * @return All dependencies of this pool.
 	 */
 	@NonNull
-	Set<Object> getAllDependencies();
+	Set<Dependency> getAllDependencies();
 	
 	/**
 	 * Register object as dependency with specific name and class

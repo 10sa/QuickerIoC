@@ -1,7 +1,5 @@
 package com.tensa.robotarm;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NonNull;
 
 import java.util.*;
@@ -40,25 +38,13 @@ public class HashSetDependencyPool implements DependencyPool {
 	}
 	
 	@Override
-	public @NonNull Set<Object> getAllDependencies() {
+	public @NonNull Set<Dependency> getAllDependencies() {
 		return Collections.unmodifiableSet(dependencies);
 	}
 	
 	@Override
 	public void register(@NonNull final Object object, @NonNull final String name, @NonNull final Class<?> clazz) {
 		dependencies.add(new Dependency(object, name, clazz));
-	}
-	
-	@Data
-	@AllArgsConstructor
-	protected static class Dependency {
-		
-		private Object object;
-		
-		private String name;
-		
-		private Class<?> clazz;
-		
 	}
 	
 }
