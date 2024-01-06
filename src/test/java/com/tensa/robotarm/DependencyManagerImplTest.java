@@ -7,20 +7,27 @@ import lombok.val;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.description.annotation.AnnotationDescription;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class DependencyManagerImplTest {
+	
+	DependencyManagerImpl manager;
+	
+	@BeforeEach
+	void beforeEach() {
+		manager = new DependencyManagerImpl(new HashSetDependencyPool());
+	}
 	
 	@SneakyThrows
 	@Test
 	void initializeTest() {
-		val manager = new DependencyManagerImpl(new HashSetDependencyPool());
-		
 		val dependency1 = new ByteBuddy()
 			.subclass(Object.class)
 			.annotateType(AnnotationDescription.Builder.ofType(Dependency.class).build())
@@ -72,7 +79,6 @@ class DependencyManagerImplTest {
 	@SneakyThrows
 	@Test
 	void injectTest() {
-		val manager = new DependencyManagerImpl(new HashSetDependencyPool());
 		val injectObject = new ByteBuddy()
 			.subclass(Object.class)
 			.defineField("dependency", Object.class, Modifier.PUBLIC)
@@ -91,6 +97,28 @@ class DependencyManagerImplTest {
 			injectObject.getClass()
 				.getDeclaredField("dependency")
 				.get(injectObject)
+		);
+	}
+	
+	@SneakyThrows
+	@Test
+	void allowCastingInjectTest() {
+		val injectObject = new ByteBuddy()
+			.subclass(Object.class)
+			.defineField("dependency", Object.class, Modifier.PUBLIC)
+			.annotateField(AnnotationDescription.Builder.ofType(Injection.class)
+				.define("allowCasting", false)
+				.build())
+			.make()
+			.load(this.getClass().getClassLoader())
+			.getLoaded()
+			.newInstance();
+		
+		val dependencyObject = "string";
+		manager.getDependencyPool().register(dependencyObject, "", Object.class);
+		assertThrowsExactly(
+			DependencyUnsatisfiedException.class,
+			() -> manager.inject(injectObject)
 		);
 	}
 	

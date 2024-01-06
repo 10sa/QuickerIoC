@@ -5,10 +5,7 @@ import lombok.NonNull;
 import lombok.val;
 
 import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class DependencyManagerImpl implements DependencyManager {
 	
@@ -71,10 +68,20 @@ public class DependencyManagerImpl implements DependencyManager {
 		final Class<?> clazz = injectInfo.clazz().equals(Void.class) ? field.getType() : injectInfo.clazz();
 		
 		val dep = dependencyPool.getDependency(name, clazz);
+		
+		// If dependency is required but not present.
 		if (injectInfo.required() && !dep.isPresent())
 			throw new DependencyUnsatisfiedException();
 		
-		dep.ifPresent((v -> setField(object, field, v)));
+		dep.ifPresent(v -> {
+			// If dependency casting not allowed, but type is not equals (= exact match)
+			if (!injectInfo.allowCasting() && !Objects.equals(injectInfo.clazz(), v.getClass())) {
+				if (injectInfo.required())
+					throw new DependencyUnsatisfiedException();
+			}
+			else
+				setField(object, field, v);
+		});
 	}
 	
 	private static void setField(final Object object, final Field field, final Object value) {
