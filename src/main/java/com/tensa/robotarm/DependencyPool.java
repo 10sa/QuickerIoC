@@ -51,4 +51,19 @@ public interface DependencyPool {
 	 */
 	void register(@NonNull Object object, @NonNull String name, @NonNull Class<?> clazz);
 	
+	/**
+	 * Remove dependency from pool.
+	 *
+	 * @param name  Dependency's name.
+	 * @param clazz Dependency's class.
+	 */
+	void remove(@NonNull String name, @NonNull Class<?> clazz);
+	
+	/**
+	 * Remove dependency named empty string ("") from pool.
+	 *
+	 * @param clazz Dependency's class.
+	 */
+	void remove(@NonNull Class<?> clazz);
+	
 }

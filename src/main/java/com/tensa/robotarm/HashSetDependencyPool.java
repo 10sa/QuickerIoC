@@ -47,4 +47,14 @@ public class HashSetDependencyPool implements DependencyPool {
 		dependencies.add(new Dependency(object, name, clazz));
 	}
 	
+	@Override
+	public void remove(@NonNull final String name, @NonNull final Class<?> clazz) {
+		dependencies.removeIf(v -> Objects.equals(v.getName(), name) && Objects.equals(v.getClazz(), clazz));
+	}
+	
+	@Override
+	public void remove(@NonNull final Class<?> clazz) {
+		dependencies.removeIf(v -> Objects.equals(v.getName(), "") && Objects.equals(v.getClazz(), clazz));
+	}
+	
 }
