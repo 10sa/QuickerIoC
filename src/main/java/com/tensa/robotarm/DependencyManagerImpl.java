@@ -75,7 +75,7 @@ public class DependencyManagerImpl implements DependencyManager {
 		
 		dep.ifPresent(v -> {
 			// If dependency casting not allowed, but type is not equals (= exact match)
-			if (!injectInfo.allowCasting() && !Objects.equals(injectInfo.clazz(), v.getClass())) {
+			if (!injectInfo.allowCasting() && !Objects.equals(clazz, v.getClass())) {
 				if (injectInfo.required())
 					throw new DependencyUnsatisfiedException();
 			}

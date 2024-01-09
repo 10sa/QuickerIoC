@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DependencyManagerImplTest {
 	
@@ -120,6 +119,11 @@ class DependencyManagerImplTest {
 			DependencyUnsatisfiedException.class,
 			() -> manager.inject(injectObject)
 		);
+		
+		manager.getDependencyPool().remove(Object.class);
+		manager.getDependencyPool().register(new Object(), "", Object.class);
+		
+		assertDoesNotThrow(() -> manager.inject(injectObject));
 	}
 	
 }
