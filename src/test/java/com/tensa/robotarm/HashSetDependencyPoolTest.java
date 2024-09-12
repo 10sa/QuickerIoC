@@ -15,13 +15,15 @@ class HashSetDependencyPoolTest {
 		
 		val dependency1 = new Object();
 		
-		pool.register(dependency1, "", Void.class);
-		assertThat(pool.getDependency("", Object.class)).isEqualTo(dependency1);
-		pool.remove(Void.class);
+		pool.register(dependency1, "", null);
+		assertThat(pool.getDependency("", Object.class)).hasValue(dependency1);
+		assertThat(pool.getDependency(Object.class)).hasValue(dependency1);
+		pool.remove(dependency1.getClass());
 		
 		val dependency2 = new Object();
-		pool.register(dependency2, "", Void.class);
-		assertThat(pool.getDependency("", Object.class)).isEqualTo(dependency2);
+		pool.register(dependency2, "", null);
+		assertThat(pool.getDependency("", Object.class)).hasValue(dependency2);
+		assertThat(pool.getDependency(Object.class)).hasValue(dependency2);
 	}
 	
 }
