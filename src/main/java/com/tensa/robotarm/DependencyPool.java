@@ -26,6 +26,15 @@ public interface DependencyPool {
 	@NonNull <T> Optional<T> getDependency(@NonNull String name, @NonNull Class<T> clazz);
 	
 	/**
+	 * Returning dependency for specific class and empty name.
+	 *
+	 * @param clazz Class of dependency. Cannot be null.
+	 * @param <T>   Type of dependency.
+	 * @return A dependency of specific name and class. Can be not present.
+	 */
+	@NonNull <T> Optional<T> getDependency(@NonNull Class<T> clazz);
+	
+	/**
 	 * Returning all dependencies for specific class.
 	 *
 	 * @param clazz Class of dependencies.
@@ -49,7 +58,22 @@ public interface DependencyPool {
 	 * @param name   Dependency's name.
 	 * @param clazz  Dependency's class.
 	 */
-	void register(@NonNull Object object, @NonNull String name, @NonNull Class<?> clazz);
+	void register(@NonNull Object object, String name, Class<?> clazz);
+	
+	/**
+	 * Register object as dependency with specific name and object's class.
+	 *
+	 * @param object Object to register dependency.
+	 * @param name   Dependency's name.
+	 */
+	void register(@NonNull Object object, String name);
+	
+	/**
+	 * Register object as dependency with empty name and object's class.
+	 *
+	 * @param object Object to register dependency.
+	 */
+	void register(@NonNull Object object);
 	
 	/**
 	 * Remove dependency from pool.

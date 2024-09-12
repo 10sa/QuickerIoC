@@ -30,6 +30,14 @@ public class HashSetDependencyPool implements DependencyPool {
 	}
 	
 	@Override
+	public @NonNull <T> Optional<T> getDependency(@NonNull final Class<T> clazz) {
+		return dependencies.stream()
+			.filter(v -> Objects.equals(clazz, v.getClazz()))
+			.map(v -> clazz.cast(v.getObject()))
+			.findFirst();
+	}
+	
+	@Override
 	public @NonNull <T> List<T> getDependencies(@NonNull final Class<T> clazz) {
 		return dependencies.stream()
 			.filter(v -> Objects.equals(clazz, v.getClazz()))
@@ -43,8 +51,18 @@ public class HashSetDependencyPool implements DependencyPool {
 	}
 	
 	@Override
-	public void register(@NonNull final Object object, @NonNull final String name, @NonNull final Class<?> clazz) {
-		dependencies.add(new Dependency(object, name, clazz));
+	public void register(@NonNull final Object object, final String name, final Class<?> clazz) {
+		dependencies.add(new Dependency(object, name, clazz == null ? object.getClass() : clazz));
+	}
+	
+	@Override
+	public void register(@NonNull final Object object, final String name) {
+		dependencies.add(new Dependency(object, name, object.getClass()));
+	}
+	
+	@Override
+	public void register(@NonNull final Object object) {
+		dependencies.add(new Dependency(object, "", object.getClass()));
 	}
 	
 	@Override
