@@ -1,14 +1,3 @@
 allprojects {
 	group = 'com.tensa'
 }
-
-subprojects {
-	apply plugin: 'java'
-
-	java {
-		toolchain {
-			languageVersion = JavaLanguageVersion.of(8)
-			vendor = JvmVendorSpec.ADOPTIUM
-		}
-	}
-}
